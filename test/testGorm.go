@@ -2,7 +2,6 @@ package main
 
 import (
 	"chat/models"
-	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -17,16 +16,16 @@ func main() {
 	db.AutoMigrate(&models.UserBasic{})
 
 	// Create
-	db.Create(&models.UserBasic{Name: "jack"})
+	//db.Create(&models.UserBasic{Name: "jack"})
 
 	// Read
-	var User models.UserBasic
+	//var User models.UserBasic
 	// find product with integer primary key
-	fmt.Println(db.First(&User, 1))
+	//fmt.Println(db.First(&User, 1))
 	//db.First(&product, "code = ?", "D42") // find product with code D42
 
 	// Update - update product's price to 200
-	db.Model(&User).Update("Name", "cake")
+	//db.Model(&User).Update("Name", "cake")
 	// Update - update multiple fields
 	//db.Model(&product).Updates(Product{Price: 200, Code: "F42"}) // non-zero fields
 	//db.Model(&product).Updates(map[string]interface{}{"Price": 200, "Code": "F42"})
