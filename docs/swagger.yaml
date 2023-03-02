@@ -23,7 +23,7 @@ paths:
         type: string
       - description: 确认密码
         in: query
-        name: repassword
+        name: rePassword
         type: string
       responses:
         "200":

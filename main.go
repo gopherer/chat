@@ -9,5 +9,6 @@ func main() {
 	r := router.Router()
 	utils.InitConfig()
 	utils.InitMySQL()
+	utils.InitRedis()
 	r.Run(":80")
 }

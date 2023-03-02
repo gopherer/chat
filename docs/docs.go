@@ -52,7 +52,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "确认密码",
-                        "name": "repassword",
+                        "name": "rePassword",
                         "in": "query"
                     }
                 ],
