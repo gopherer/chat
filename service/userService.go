@@ -39,11 +39,21 @@ func GetUserList(c *gin.Context) {
 // @Router /user/CreateUser [get]
 func CreateUser(c *gin.Context) {
 	user := models.UserBasic{}
-	user.Name = c.Query("name")
-	password := c.Query("password")
-	rePassword := c.Query("rePassword")
+	user.Name = c.Request.FormValue("name")
+	password := c.Request.FormValue("password")
+	rePassword := c.Request.FormValue("rePassword")
 
 	salt := fmt.Sprintf("%06d", rand.Int31())
+
+	if user.Name == "" || user.PassWord == "" {
+
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1, //	0 成功   -1 失败
+			"message": "用户名或密码不能为空",
+			"data":    user,
+		})
+		return
+	}
 
 	data := models.FindUserByName(user.Name)
 	if data.Name != "" {
@@ -203,4 +213,8 @@ func MsgHandle(ws *websocket.Conn, c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+func SendUserMsg(c *gin.Context) {
+	models.Chat(c.Writer, c.Request)
 }

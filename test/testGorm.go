@@ -13,7 +13,10 @@ func main() {
 	}
 
 	// Migrate the schema
-	db.AutoMigrate(&models.UserBasic{})
+	//db.AutoMigrate(&models.UserBasic{})
+	db.AutoMigrate(&models.Contact{})
+	db.AutoMigrate(&models.GroupBasic{})
+	db.AutoMigrate(&models.Message{})
 
 	// Create
 	//db.Create(&models.UserBasic{Name: "jack"})
