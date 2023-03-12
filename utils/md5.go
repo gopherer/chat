@@ -1,12 +1,18 @@
+/**
+* @Auth:ShenZ
+* @Description:
+* @CreateDate:2022/06/15 16:27:35
+ */
 package utils
 
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"fmt"
 	"strings"
 )
 
-//Md5Encode 小写
+//小写
 func Md5Encode(data string) string {
 	h := md5.New()
 	h.Write([]byte(data))
@@ -14,17 +20,19 @@ func Md5Encode(data string) string {
 	return hex.EncodeToString(tempStr)
 }
 
-//MD5Encode 大写
+//大写
 func MD5Encode(data string) string {
 	return strings.ToUpper(Md5Encode(data))
 }
 
-//MakePassword 加密
-func MakePassword(plainPwd string, salt string) string {
-	return Md5Encode(plainPwd + salt)
+//加密
+func MakePassword(plainpwd, salt string) string {
+	return Md5Encode(plainpwd + salt)
 }
 
-//ValidPassword 解密
-func ValidPassword(plainPwd string, salt string, password string) bool {
-	return Md5Encode(plainPwd+salt) == password
+//解密
+func ValidPassword(plainpwd, salt string, password string) bool {
+	md := Md5Encode(plainpwd + salt)
+	fmt.Println(md + "				" + password)
+	return md == password
 }

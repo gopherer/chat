@@ -1,13 +1,18 @@
+/**
+* @Auth:ShenZ
+* @Description:
+* @CreateDate:2022/06/15 14:57:55
+ */
 package models
 
 import "gorm.io/gorm"
 
-//GroupBasic 群信息
+//群信息
 type GroupBasic struct {
 	gorm.Model
 	Name    string
 	OwnerId uint
-	icon    string
+	Icon    string
 	Type    int
 	Desc    string
 }

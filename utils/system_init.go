@@ -1,16 +1,22 @@
+/**
+* @Auth:ShenZ
+* @Description:
+* @CreateDate:2022/06/15 16:37:35
+ */
 package utils
 
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
+	"time"
+
 	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
-	"os"
-	"time"
 )
 
 var (
@@ -21,11 +27,11 @@ var (
 func InitConfig() {
 	viper.SetConfigName("app")
 	viper.AddConfigPath("config")
-	if err := viper.ReadInConfig(); err != nil {
+	err := viper.ReadInConfig()
+	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("config app :", viper.Get("app"))
-	fmt.Println("config app :", viper.Get("mysql"))
+	fmt.Println("config  app inited 。。。。")
 }
 
 func InitMySQL() {
@@ -34,16 +40,14 @@ func InitMySQL() {
 		log.New(os.Stdout, "\r\n", log.LstdFlags),
 		logger.Config{
 			SlowThreshold: time.Second, //慢SQL阈值
-			Colorful:      true,        //彩色
 			LogLevel:      logger.Info, //级别
+			Colorful:      true,        //彩色
 		},
 	)
-	DB, _ = gorm.Open(mysql.Open(viper.GetString("mysql.dns")), &gorm.Config{
-		Logger: newLogger,
-	})
-	//if err != nil {
-	//	panic("failed to connect database")
-	//}
+
+	DB, _ = gorm.Open(mysql.Open(viper.GetString("mysql.dns")),
+		&gorm.Config{Logger: newLogger})
+	fmt.Println(" MySQL inited 。。。。")
 	//user := models.UserBasic{}
 	//DB.Find(&user)
 	//fmt.Println(user)
@@ -66,16 +70,23 @@ const (
 //Publish 发布消息到Redis
 func Publish(ctx context.Context, channel string, msg string) error {
 	var err error
-	fmt.Println("Publish ......")
+	fmt.Println("Publish 。。。。", msg)
 	err = Red.Publish(ctx, channel, msg).Err()
+	if err != nil {
+		fmt.Println(err)
+	}
 	return err
 }
 
 //Subscribe 订阅Redis消息
 func Subscribe(ctx context.Context, channel string) (string, error) {
 	sub := Red.Subscribe(ctx, channel)
-	fmt.Println("Subscribe.....", ctx)
+	fmt.Println("Subscribe 。。。。", ctx)
 	msg, err := sub.ReceiveMessage(ctx)
-	fmt.Println("Subscribe.....", msg.Payload)
+	if err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	fmt.Println("Subscribe 。。。。", msg.Payload)
 	return msg.Payload, err
 }

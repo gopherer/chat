@@ -7,7 +7,7 @@
         "/index": {
             "get": {
                 "tags": [
-                    "GetIndex"
+                    "首页"
                 ],
                 "responses": {
                     "200": {
@@ -19,7 +19,7 @@
                 }
             }
         },
-        "/user/CreateUser": {
+        "/user/createUser": {
             "get": {
                 "tags": [
                     "用户模块"
@@ -41,13 +41,13 @@
                     {
                         "type": "string",
                         "description": "确认密码",
-                        "name": "rePassword",
+                        "name": "repassword",
                         "in": "query"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "code\",\"message\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -55,7 +55,7 @@
                 }
             }
         },
-        "/user/DeleteUser": {
+        "/user/deleteUser": {
             "get": {
                 "tags": [
                     "用户模块"
@@ -71,7 +71,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "code\",\"message\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -79,29 +79,29 @@
                 }
             }
         },
-        "/user/FindUserByNameAndPwd": {
-            "post": {
+        "/user/findUserByNameAndPwd": {
+            "get": {
                 "tags": [
                     "用户模块"
                 ],
-                "summary": "用户登录",
+                "summary": "所有用户",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "name",
+                        "description": "用户名",
                         "name": "name",
-                        "in": "formData"
+                        "in": "query"
                     },
                     {
                         "type": "string",
-                        "description": "password",
+                        "description": "密码",
                         "name": "password",
-                        "in": "formData"
+                        "in": "query"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "code\",\"message\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -109,7 +109,23 @@
                 }
             }
         },
-        "/user/UpdateUser": {
+        "/user/getUserList": {
+            "get": {
+                "tags": [
+                    "用户模块"
+                ],
+                "summary": "所有用户",
+                "responses": {
+                    "200": {
+                        "description": "code\",\"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/updateUser": {
             "post": {
                 "tags": [
                     "用户模块"
@@ -149,23 +165,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/user/getUserList": {
-            "get": {
-                "tags": [
-                    "用户模块"
-                ],
-                "summary": "所有用户",
-                "responses": {
-                    "200": {
-                        "description": "OK",
+                        "description": "code\",\"message\"}",
                         "schema": {
                             "type": "string"
                         }

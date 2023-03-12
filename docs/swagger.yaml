@@ -9,8 +9,8 @@ paths:
           schema:
             type: string
       tags:
-      - GetIndex
-  /user/CreateUser:
+      - 首页
+  /user/createUser:
     get:
       parameters:
       - description: 用户名
@@ -23,17 +23,17 @@ paths:
         type: string
       - description: 确认密码
         in: query
-        name: rePassword
+        name: repassword
         type: string
       responses:
         "200":
-          description: OK
+          description: code","message"}
           schema:
             type: string
       summary: 新增用户
       tags:
       - 用户模块
-  /user/DeleteUser:
+  /user/deleteUser:
     get:
       parameters:
       - description: id
@@ -42,32 +42,42 @@ paths:
         type: string
       responses:
         "200":
-          description: OK
+          description: code","message"}
           schema:
             type: string
       summary: 删除用户
       tags:
       - 用户模块
-  /user/FindUserByNameAndPwd:
-    post:
+  /user/findUserByNameAndPwd:
+    get:
       parameters:
-      - description: name
-        in: formData
+      - description: 用户名
+        in: query
         name: name
         type: string
-      - description: password
-        in: formData
+      - description: 密码
+        in: query
         name: password
         type: string
       responses:
         "200":
-          description: OK
+          description: code","message"}
           schema:
             type: string
-      summary: 用户登录
+      summary: 所有用户
       tags:
       - 用户模块
-  /user/UpdateUser:
+  /user/getUserList:
+    get:
+      responses:
+        "200":
+          description: code","message"}
+          schema:
+            type: string
+      summary: 所有用户
+      tags:
+      - 用户模块
+  /user/updateUser:
     post:
       parameters:
       - description: id
@@ -92,20 +102,10 @@ paths:
         type: string
       responses:
         "200":
-          description: OK
+          description: code","message"}
           schema:
             type: string
       summary: 修改用户
-      tags:
-      - 用户模块
-  /user/getUserList:
-    get:
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-      summary: 所有用户
       tags:
       - 用户模块
 swagger: "2.0"

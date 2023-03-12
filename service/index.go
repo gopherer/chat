@@ -1,32 +1,70 @@
+/**
+* @Auth:ShenZ
+* @Description:
+* @CreateDate:2022/06/14 14:17:55
+ */
 package service
 
 import (
+	"ginchat/models"
+	"strconv"
+	"text/template"
+
 	"github.com/gin-gonic/gin"
-	"html/template"
 )
 
-//GetIndex
-// @Tags GetIndex
-// @Success 200 {string} pong
+// GetIndex
+// @Tags 首页
+// @Success 200 {string} welcome
 // @Router /index [get]
 func GetIndex(c *gin.Context) {
-	inx, err := template.ParseFiles("views/user/index.html")
+	ind, err := template.ParseFiles("index.html", "views/chat/head.html")
 	if err != nil {
 		panic(err)
 	}
-	inx.Execute(c.Writer, nil)
-	//c.JSON(200, gin.H{
-	//	"message": "pong",
-	//})
+	ind.Execute(c.Writer, "index")
+	// c.JSON(200, gin.H{
+	// 	"message": "welcome !!  ",
+	// })
 }
 
 func ToRegister(c *gin.Context) {
-	inx, err := template.ParseFiles("index.html")
+	ind, err := template.ParseFiles("views/user/register.html")
 	if err != nil {
 		panic(err)
 	}
-	inx.Execute(c.Writer, "index")
-	//c.JSON(200, gin.H{
-	//	"message": "pong",
-	//})
+	ind.Execute(c.Writer, "register")
+	// c.JSON(200, gin.H{
+	// 	"message": "welcome !!  ",
+	// })
+}
+
+func ToChat(c *gin.Context) {
+	ind, err := template.ParseFiles("views/chat/index.html",
+		"views/chat/head.html",
+		"views/chat/foot.html",
+		"views/chat/tabmenu.html",
+		"views/chat/concat.html",
+		"views/chat/group.html",
+		"views/chat/profile.html",
+		"views/chat/createcom.html",
+		"views/chat/userinfo.html",
+		"views/chat/main.html")
+	if err != nil {
+		panic(err)
+	}
+	userId, _ := strconv.Atoi(c.Query("userId"))
+	token := c.Query("token")
+	user := models.UserBasic{}
+	user.ID = uint(userId)
+	user.Identity = token
+	//fmt.Println("ToChat>>>>>>>>", user)
+	ind.Execute(c.Writer, user)
+	// c.JSON(200, gin.H{
+	// 	"message": "welcome !!  ",
+	// })
+}
+
+func Chat(c *gin.Context) {
+	models.Chat(c.Writer, c.Request)
 }
