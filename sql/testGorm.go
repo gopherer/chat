@@ -1,29 +1,24 @@
-/**
-* @Auth:ShenZ
-* @Description:
-* @CreateDate:2022/06/15 10:57:44
- */
 package main
 
 import (
-	"ginchat/models"
+	"chat/models"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 func main() {
-	db, err := gorm.Open(mysql.Open("root:1234@tcp(127.0.0.1:3307)/ginchat?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:root@tcp(127.0.0.1:3306)/chat?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
 
 	// 迁移 schema
 	db.AutoMigrate(&models.Community{})
-	//db.AutoMigrate(&models.UserBasic{})
-	//db.AutoMigrate(&models.Message{})
-	//db.AutoMigrate(&models.GroupBasic{})
-	//db.AutoMigrate(&models.Contact{})
+	db.AutoMigrate(&models.UserBasic{})
+	db.AutoMigrate(&models.Message{})
+	db.AutoMigrate(&models.GroupBasic{})
+	db.AutoMigrate(&models.Contact{})
 
 	// Create
 	// user := &models.UserBasic{}

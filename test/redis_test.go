@@ -1,14 +1,9 @@
-/**
-* @Auth:ShenZ
-* @Description:
-* @CreateDate:2022/06/15 17:27:15
- */
-package mq
+package test
 
 import (
+	"chat/utils"
 	"context"
 	"fmt"
-	"ginchat/utils"
 	"testing"
 	"time"
 )

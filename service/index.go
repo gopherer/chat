@@ -1,12 +1,7 @@
-/**
-* @Auth:ShenZ
-* @Description:
-* @CreateDate:2022/06/14 14:17:55
- */
 package service
 
 import (
-	"ginchat/models"
+	"chat/models"
 	"strconv"
 	"text/template"
 

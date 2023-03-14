@@ -1,9 +1,9 @@
 package main
 
 import (
-	"ginchat/models"
-	"ginchat/router" //  router "ginchat/router"
-	"ginchat/utils"
+	"chat/models"
+	"chat/router" //  router "ginchat/router"
+	"chat/utils"
 	"time"
 
 	"github.com/spf13/viper"

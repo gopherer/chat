@@ -1,8 +1,3 @@
-/**
-* @Auth:ShenZ
-* @Description:
-* @CreateDate:2022/06/15 14:57:55
- */
 package models
 
 import "gorm.io/gorm"

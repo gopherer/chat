@@ -1,8 +1,3 @@
-/**
-* @Auth:ShenZ
-* @Description:
-* @CreateDate:2022/06/15 16:27:35
- */
 package utils
 
 import (

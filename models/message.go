@@ -1,10 +1,10 @@
 package models
 
 import (
+	"chat/utils"
 	"context"
 	"encoding/json"
 	"fmt"
-	"ginchat/utils"
 	"net"
 	"net/http"
 	"strconv"
