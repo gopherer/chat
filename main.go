@@ -5,6 +5,9 @@ import (
 	"chat/router" //  router "ginchat/router"
 	"chat/utils"
 	"fmt"
+	"log"
+	"net/http"
+	_ "net/http/pprof"
 	"time"
 
 	"github.com/spf13/viper"
@@ -15,6 +18,10 @@ func main() {
 	utils.InitMySQL()
 	utils.InitRedis()
 	InitTimer()
+	go func() {
+		log.Println(http.ListenAndServe("localhost:8080", nil))
+	}()
+
 	r := router.Router()
 	err := r.Run(viper.GetString("port.server"))
 	if err != nil {
